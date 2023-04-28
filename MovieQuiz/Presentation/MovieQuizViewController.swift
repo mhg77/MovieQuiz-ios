@@ -17,11 +17,7 @@ final class MovieQuizViewController: UIViewController {
         show(quiz: convert(model: currentQuestion))
     }
     
-    struct QuizQuestion {
-        let image: String
-        let text: String
-        let correctAnswer: Bool
-    }
+    
     
     struct QuizStepViewModel {
         let image: UIImage
