@@ -21,11 +21,7 @@ final class MovieQuizViewController: UIViewController {
     
    
     
-    struct QuizResultsViewModel {
-        let title: String
-        let text: String
-        let buttonText: String
-    }
+   
     
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         let questionStep = QuizStepViewModel(
