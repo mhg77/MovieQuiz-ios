@@ -12,6 +12,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private let questionsAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
+    private var alertPresenter: AlertPresenter?
     
     
     override func viewDidLoad() {
@@ -19,6 +20,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         
         questionFactory = QuestionFactory(delegate: self)
         questionFactory?.requestNextQuestion()
+        alertPresenter = AlertPresenter(delegate: self)
     }
     
     // MARK: - QuestionFactoryDelegate
@@ -49,39 +51,26 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         counterLabel.text = step.questionNumber
     }
     
-    private func show(quiz result: QuizResultsViewModel) {
-        let alert = UIAlertController(
-            title: result.title,
-            message: result.text,
-            preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: result.buttonText, style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            
-            self.imageView.layer.borderWidth = 0
-            self.imageView.layer.borderColor = nil
-            
-            self.currentQuestionIndex = 0
-            self.correctAnswers = 0
-            
-            questionFactory?.requestNextQuestion()
-        }
-        
-        alert.addAction(action)
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     private func showNextQuestionOrResults() {
         view.isUserInteractionEnabled = true
         
         if currentQuestionIndex == questionsAmount - 1 {
             let text = "Ваш результат: \(correctAnswers)/10"
-            let viewModel = QuizResultsViewModel(
+            let alertModel = AlertModel(
                 title: "Этот раунд окончен!",
-                text: text,
-                buttonText: "Сыграть еще раз")
-            show(quiz: viewModel)
+                message: text,
+                buttonText: "Сыграть еще раз") { [weak self] _ in
+                    guard let self = self else { return }
+                    
+                    self.imageView.layer.borderWidth = 0
+                    self.imageView.layer.borderColor = nil
+                    
+                    self.currentQuestionIndex = 0
+                    self.correctAnswers = 0
+                    
+                    questionFactory?.requestNextQuestion()
+                }
+            alertPresenter?.showAlert(alertModel: alertModel)
         } else {
             imageView.layer.borderWidth = 0
             imageView.layer.borderColor = nil
