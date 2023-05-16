@@ -13,6 +13,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
     private var alertPresenter: AlertPresenter?
+    private var statisticService: StatisticService?
     
     
     override func viewDidLoad() {
@@ -21,6 +22,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         questionFactory = QuestionFactory(delegate: self)
         questionFactory?.requestNextQuestion()
         alertPresenter = AlertPresenter(delegate: self)
+        statisticService = StatisticServiceImplementation()
     }
     
     // MARK: - QuestionFactoryDelegate
@@ -55,7 +57,18 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         view.isUserInteractionEnabled = true
         
         if currentQuestionIndex == questionsAmount - 1 {
-            let text = "Ваш результат: \(correctAnswers)/10"
+            guard let statisticService = statisticService else {
+                return
+            }
+            
+            statisticService.store(correct: correctAnswers, total: questionsAmount)
+            
+            let text = """
+                       Ваш результат: \(correctAnswers)/\(questionsAmount)
+                       Количество сыгранных квизов: \(statisticService.gamesCount)
+                       Рекорд: \(statisticService.bestGame.correct)/\(statisticService.bestGame.total) (\(statisticService.bestGame.date.dateTimeString))
+                       Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%
+                       """
             let alertModel = AlertModel(
                 title: "Этот раунд окончен!",
                 message: text,
