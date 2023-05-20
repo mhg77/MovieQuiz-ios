@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2745F3B72A18EAD500EADD34 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2745F3B62A18EAD500EADD34 /* NetworkClient.swift */; };
 		27685DF229D20ECC00111FE1 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27685DF029D20ECC00111FE1 /* YS Display-Medium.ttf */; };
 		27685DF329D20ECC00111FE1 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27685DF129D20ECC00111FE1 /* YS Display-Bold.ttf */; };
 		27975AD42A14178E0024A707 /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27975AD32A14178E0024A707 /* StatisticService.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2745F3B62A18EAD500EADD34 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		27685DF029D20ECC00111FE1 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
 		27685DF129D20ECC00111FE1 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
 		27975AD32A14178E0024A707 /* StatisticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticService.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				27E3A8D029FDB02600A81BB8 /* QuestionFactoryProtocol.swift */,
 				27E3A8D229FFC6A100A81BB8 /* QuestionFactoryDelegate.swift */,
 				27975AD32A14178E0024A707 /* StatisticService.swift */,
+				2745F3B62A18EAD500EADD34 /* NetworkClient.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				27E3A8D329FFC6A100A81BB8 /* QuestionFactoryDelegate.swift in Sources */,
 				27E3A8D729FFE35400A81BB8 /* AlertPresenter.swift in Sources */,
 				AD1ABAB62831907B00B3E448 /* MovieQuizViewController.swift in Sources */,
+				2745F3B72A18EAD500EADD34 /* NetworkClient.swift in Sources */,
 				27E3A8CB29FC620F00A81BB8 /* QuizStepViewModel.swift in Sources */,
 				27975AD42A14178E0024A707 /* StatisticService.swift in Sources */,
 				27E3A8CF29FC625000A81BB8 /* QuizQuestion.swift in Sources */,
