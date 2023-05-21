@@ -13,7 +13,7 @@ class AlertPresenter {
         self.delegate = delegate
     }
     
-    func showAlert(alertModel: AlertModel) {
+    func show(alertModel: AlertModel) {
         let alert = UIAlertController(
             title: alertModel.title,
             message: alertModel.message,
