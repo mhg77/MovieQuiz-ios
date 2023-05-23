@@ -8,12 +8,13 @@
 import UIKit
 
 class AlertPresenter {
-    private weak var delegate: UIViewController?
-    init(delegate: UIViewController) {
+    private weak var delegate: MovieQuizViewControllerProtocol?
+    init(delegate: MovieQuizViewControllerProtocol) {
         self.delegate = delegate
     }
     
     func show(alertModel: AlertModel) {
+        let vc = delegate as! UIViewController
         let alert = UIAlertController(
             title: alertModel.title,
             message: alertModel.message,
@@ -23,6 +24,6 @@ class AlertPresenter {
         
         let action = UIAlertAction(title: alertModel.buttonText, style: .default, handler: alertModel.completion)
         alert.addAction(action)
-        delegate?.present(alert, animated: true, completion: nil)
+        vc.present(alert, animated: true, completion: nil)
     }
 }
