@@ -12,11 +12,11 @@ final class MovieQuizPresenter {
     private var questionFactory: QuestionFactoryProtocol?
     private var alertPresenter: AlertPresenter?
     private var statisticService: StatisticService?
-    weak var viewController: MovieQuizViewController?
-    var currentQuestion: QuizQuestion?
+    private weak var viewController: MovieQuizViewController?
+    private var currentQuestion: QuizQuestion?
     private var currentQuestionIndex: Int = 0
     private var correctAnswers = 0
-    let questionsAmount: Int = 10
+    private let questionsAmount: Int = 10
     
     init(viewController: MovieQuizViewController) {
         self.viewController = viewController
@@ -55,7 +55,7 @@ final class MovieQuizPresenter {
         didAnswer(isYes: false)
     }
     
-    func proceedWithAnswer(isCorrect: Bool) {
+    private func proceedWithAnswer(isCorrect: Bool) {
         viewController?.disableUserInteraction()
         viewController?.highlightImageBorder(isCorrect: isCorrect)
         
