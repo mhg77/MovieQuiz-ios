@@ -8,8 +8,9 @@
 import UIKit
 
 class AlertPresenter {
-    private weak var delegate: UIViewController?
-    init(delegate: UIViewController) {
+    private weak var delegate: MovieQuizViewControllerProtocol?
+    
+    init(delegate: MovieQuizViewControllerProtocol) {
         self.delegate = delegate
     }
     
@@ -19,8 +20,14 @@ class AlertPresenter {
             message: alertModel.message,
             preferredStyle: .alert)
         
-        let action = UIAlertAction(title: alertModel.buttonText, style: .default, handler: alertModel.completion)
+        alert.view.accessibilityIdentifier = "Game results"
+        
+        let action = UIAlertAction(title: alertModel.buttonText, style: .default) { _ in
+            alertModel.completion?()
+        }
         alert.addAction(action)
-        delegate?.present(alert, animated: true, completion: nil)
+        if let vc = delegate as? UIViewController {
+            vc.present(alert, animated: true, completion: nil)
+        }
     }
 }
