@@ -45,7 +45,7 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
     }
     
     func show(quiz step: QuizStepViewModel) {
-        imageView.image = step.image
+        imageView.image = UIImage(data: step.imageData)
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
     }

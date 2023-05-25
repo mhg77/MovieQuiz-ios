@@ -5,7 +5,7 @@
 //  Created by Михаил Асаилов on 22.05.2023.
 //
 
-import UIKit
+import Foundation
 
 final class MovieQuizPresenter {
     
@@ -42,7 +42,7 @@ final class MovieQuizPresenter {
     
     func convert(model: QuizQuestion) -> QuizStepViewModel {
         return QuizStepViewModel(
-            image: UIImage(data: model.image) ?? UIImage(),
+            imageData: model.image,
             question: model.text,
             questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
     }
@@ -114,7 +114,7 @@ final class MovieQuizPresenter {
         let alertModel = AlertModel(
             title: "Этот раунд окончен!",
             message: getResultMessage(),
-            buttonText: "Сыграть еще раз") { [weak self] _ in
+            buttonText: "Сыграть еще раз") { [weak self] in
                 guard let self = self else { return }
                 
                 self.resetQuestionIndex()
@@ -139,7 +139,7 @@ final class MovieQuizPresenter {
         viewController?.hideLoadingIndicator()
         let model = AlertModel(title: "Ошибка",
                                message: message,
-                               buttonText: "Попробовать ещё раз") { [weak self] _ in
+                               buttonText: "Попробовать ещё раз") { [weak self] in
             guard let self = self else { return }
             
             self.resetQuestionIndex()
