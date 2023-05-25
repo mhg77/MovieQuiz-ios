@@ -14,7 +14,6 @@ class AlertPresenter {
     }
     
     func show(alertModel: AlertModel) {
-        let vc = delegate as! UIViewController
         let alert = UIAlertController(
             title: alertModel.title,
             message: alertModel.message,
@@ -24,6 +23,8 @@ class AlertPresenter {
         
         let action = UIAlertAction(title: alertModel.buttonText, style: .default, handler: alertModel.completion)
         alert.addAction(action)
-        vc.present(alert, animated: true, completion: nil)
+        if let vc = delegate as? UIViewController {
+            vc.present(alert, animated: true, completion: nil)
+        }
     }
 }
